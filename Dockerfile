@@ -5,7 +5,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN dotnet clean ./RockPaperScisors-Microservice.sln
+RUN dotnet clean ./RockPaperScissors-Microservice.sln
 RUN dotnet publish ./RockPaperScissorsMS --configuration Release -o ./publish
 
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS run
