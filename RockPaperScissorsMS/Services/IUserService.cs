@@ -3,6 +3,6 @@ using RockPaperScissorsMS.Models;
 namespace RockPaperScissorsMS.Services;
 public interface IUserService
 {
-    // Task<User> verifyUserLogin();
-    // Task createNewUser(User newUser);
+    Task<UserSession> verifyUserLogin(string username, string password);
+    Task<UserSession> createNewUser(User newUser);
 }
