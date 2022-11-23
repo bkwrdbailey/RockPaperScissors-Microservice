@@ -3,7 +3,8 @@ namespace RockPaperScissorsMS.Models;
 
 public class UserDB
 {
-    public string username = "";
-    public string password = "";
-    public string salt = "";
+    public int id { get; set; } = 0;
+    public string username { get; set; } = "";
+    public string password { get; set; } = "";
+    public string salt { get; set; } = "";
 }

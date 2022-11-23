@@ -26,6 +26,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IGameService, GameService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ISessionService, SessionService>();
 
 var app = builder.Build();
 

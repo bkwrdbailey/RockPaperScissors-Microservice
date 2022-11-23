@@ -1,4 +1,5 @@
 using RockPaperScissorsMS.Models;
+using RockPaperScissorsMS.Clients;
 
 namespace RockPaperScissorsMS.Services;
 

@@ -7,37 +7,37 @@ namespace RockPaperScissorsMS.Services;
 
 public class UserService : IUserService
 {
-    private readonly UserClient _client;
-    public UserService(UserClient client)
+    private readonly UserClient _userClient;
+    private readonly SessionClient _sessionClient;
+    public UserService(UserClient userClient, SessionClient sessionClient)
     {
-        _client = client;
+        _userClient = userClient;
+        _sessionClient = sessionClient;
     }
 
-    public async Task<UserSession> verifyUserLogin(string username, string password)
+    // Verifying given user data with database data and creating new session tied to them
+    public async Task<bool> verifyUserLogin(string username, string password)
     {
-        UserSession currSession = new UserSession();
-        UserDB checkUser = await _client.getUserData(username);
+        UserDB checkUser = await _userClient.getUserData(username);
 
         string hashedPassword = convertToHash(password + checkUser.salt);
 
         // Checking to see if entered data matches user data in the database
         if (checkUser.username == username && checkUser.password == password)
         {
-            // Need to Attach a JWT Token to signed in user
-            currSession.AuthenticUser = true;
-            return currSession;
+            await _sessionClient.addNewSession(checkUser.id);
+            return true;
         }
         else
         {
             // Used to notify user that their entered input doesn't match what is in the database
-            currSession.AuthenticUser = false;
-            return currSession;
+            return false;
         }
     }
 
-    public async Task<UserSession> createNewUser(User newUser)
+    // Creating a new user in the backend database and creating a new session tied to them
+    public async Task<bool> createNewUser(User newUser)
     {
-        UserSession currSession = new UserSession();
         UserDB newUserEntry = new UserDB();
 
         // Creating Backend User Model
@@ -45,9 +45,18 @@ public class UserService : IUserService
         newUserEntry.username = newUser.username;
         newUserEntry.password = convertToHash(newUser.password + newUserEntry.salt);
 
-        currSession.AuthenticUser = await _client.addNewUserData(newUserEntry);
+        bool newUserCreated = await _userClient.addNewUserData(newUserEntry);
 
-        return currSession;
+        if (newUserCreated)
+        {
+            UserDB user = await _userClient.getUserData(newUserEntry.username);
+            await _sessionClient.addNewSession(user.id);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     // Hashing Method via SHA256 Algorithm 
@@ -81,11 +90,5 @@ public class UserService : IUserService
         }
 
         return salt;
-    }
-
-    // A JWT Generator to attach to user after successful signin
-    private void javaWebTokenGenerator()
-    {
-
     }
 }

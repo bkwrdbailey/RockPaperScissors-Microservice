@@ -14,13 +14,13 @@ public class UserController : ControllerBase
     }
 
     [HttpGet("user/login?name={username}&pass={password}")]
-    public async Task<UserSession> getUser(string username, string password)
+    public async Task<bool> getUser(string username, string password)
     {
         return await _service.verifyUserLogin(username, password);
     }
 
     [HttpPost("user/register")]
-    public async Task<UserSession> createUser([FromBody] User newUser)
+    public async Task<bool> createUser([FromBody] User newUser)
     {
         return await _service.createNewUser(newUser);
     }
