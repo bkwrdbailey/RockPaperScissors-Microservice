@@ -23,11 +23,12 @@ public class SessionClient
         return JsonSerializer.Deserialize<bool>(json);
     }
 
-    public async Task<bool> addNewSession(int userId)
+    public async Task addNewSession(int userId)
     {
         var serializedId = JsonSerializer.Serialize(userId);
         StringContent content = new StringContent(serializedId, UnicodeEncoding.UTF8, "application/json");
         HttpResponseMessage response = await _client.PostAsync(_urlConfig.SessionUrl + "/Create", content);
-        return JsonSerializer.Deserialize<bool>(await response.Content.ReadAsStringAsync());
+        Console.WriteLine(response.Content);
+        JsonSerializer.Deserialize<bool>(await response.Content.ReadAsStringAsync());
     }
 }
