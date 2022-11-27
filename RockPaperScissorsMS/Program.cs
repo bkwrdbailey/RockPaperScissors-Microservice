@@ -18,7 +18,7 @@ builder.Services.AddCors(options =>
                         });
 });
 
-builder.Services.Configure<UrlConfiguration>(builder.Configuration.GetSection("UrlConfigurations"));
+builder.Services.Configure<UrlConfiguration>(builder.Configuration.GetSection("UrlConfiguration"));
 
 builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
