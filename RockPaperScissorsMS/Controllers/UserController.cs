@@ -13,7 +13,7 @@ public class UserController : ControllerBase
         _service = service;
     }
 
-    [HttpGet("user/login?name={username}&pass={password}")]
+    [HttpGet("user/login/{username}/{password}")]
     public async Task<bool> getUser(string username, string password)
     {
         return await _service.verifyUserLogin(username, password);
