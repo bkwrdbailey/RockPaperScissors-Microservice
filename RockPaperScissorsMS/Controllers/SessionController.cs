@@ -13,7 +13,7 @@ public class SessionController : ControllerBase
         _service = service;
     }
 
-    [HttpPut("/Session/Status")]
+    [HttpPut("Session/Status")]
     public async Task<bool> checkSessionStatus([FromBody] string username) 
     {
         return await _service.checkSessionStatus(username);
