@@ -1,4 +1,5 @@
 using RockPaperScissorsMS.Services;
+using RockPaperScissorsMS.Clients;
 using RockPaperScissorsMS.Configurations;
 
 var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -27,6 +28,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IGameService, GameService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ISessionService, SessionService>();
+builder.Services.AddScoped<SessionClient>();
+builder.Services.AddScoped<UserClient>();
+builder.Services.AddScoped<HttpClient>();
 
 var app = builder.Build();
 
