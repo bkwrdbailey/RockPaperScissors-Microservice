@@ -20,9 +20,7 @@ public class UserClient
     {
         Console.WriteLine("Entered Client");
         HttpResponseMessage response = await _client.GetAsync(_urlConfig.UserUrl + $"/Verify/{username}");
-        Console.WriteLine(response);
         var json = await response.Content.ReadAsStringAsync();
-        Console.WriteLine(json);
         return JsonSerializer.Deserialize<UserDB>(json) ?? new UserDB();
     }
 

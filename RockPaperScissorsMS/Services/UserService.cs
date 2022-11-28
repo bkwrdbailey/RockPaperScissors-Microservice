@@ -22,22 +22,15 @@ public class UserService : IUserService
 
         string hashedPassword = convertToHash(password + checkUser.salt);
 
-        Console.WriteLine(hashedPassword);
-        Console.WriteLine(checkUser.password);
-        Console.WriteLine(checkUser.username);
-        Console.WriteLine(username);
-
         // Checking to see if entered data matches user data in the database
         if (checkUser.username.ToLower() == username.ToLower() && checkUser.password == hashedPassword)
         {
-            Console.WriteLine("Returning true....");
             await _sessionClient.addNewSession(checkUser.id);
             return true;
         }
         else
         {
             // Used to notify user that their entered input doesn't match what is in the database
-            Console.WriteLine("Returning false....");
             return false;
         }
     }

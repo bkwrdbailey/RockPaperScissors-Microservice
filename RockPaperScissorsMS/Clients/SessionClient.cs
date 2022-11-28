@@ -28,7 +28,5 @@ public class SessionClient
         var serializedId = JsonSerializer.Serialize(userId);
         StringContent content = new StringContent(serializedId, UnicodeEncoding.UTF8, "application/json");
         HttpResponseMessage response = await _client.PostAsync(_urlConfig.SessionUrl + "/Create", content);
-        Console.WriteLine(response.Content);
-        JsonSerializer.Deserialize<bool>(await response.Content.ReadAsStringAsync());
     }
 }
