@@ -29,4 +29,9 @@ public class SessionClient
         StringContent content = new StringContent(serializedId, UnicodeEncoding.UTF8, "application/json");
         HttpResponseMessage response = await _client.PostAsync(_urlConfig.SessionUrl + "/Create", content);
     }
+
+    public async Task deleteASession(int userId)
+    {
+        HttpResponseMessage response = await _client.DeleteAsync(_urlConfig.SessionUrl + $"/Remove/{userId}");
+    }
 }

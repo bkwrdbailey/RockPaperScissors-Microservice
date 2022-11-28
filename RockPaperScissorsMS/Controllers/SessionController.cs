@@ -14,8 +14,14 @@ public class SessionController : ControllerBase
     }
 
     [HttpPut("Session/Status")]
-    public async Task<bool> checkSessionStatus([FromBody] string username) 
+    public async Task<bool> checkSessionStatus([FromBody] string username)
     {
         return await _service.checkSessionStatus(username);
+    }
+
+    [HttpDelete("Session/Removal/{userId}")]
+    public async Task removeASession(int userId)
+    {
+        await _service.removeASession(userId);
     }
 }

@@ -19,4 +19,9 @@ public class SessionService : ISessionService
         UserDB checkUser = await _userClient.getUserData(username);
         return await _sessionClient.checkIfSessionIsValid(checkUser.id);
     }
+
+    public async Task removeASession(int userId)
+    {
+        await _sessionClient.deleteASession(userId);
+    }
 }
