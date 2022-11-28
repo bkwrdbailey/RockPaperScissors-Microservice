@@ -19,9 +19,9 @@ public class SessionController : ControllerBase
         return await _service.checkSessionStatus(username);
     }
 
-    [HttpDelete("Session/Removal/{userId}")]
-    public async Task removeASession(int userId)
+    [HttpDelete("Session/Removal/{username}")]
+    public async Task removeASession(string username)
     {
-        await _service.removeASession(userId);
+        await _service.removeASession(username);
     }
 }

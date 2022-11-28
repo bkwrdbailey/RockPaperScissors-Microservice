@@ -20,8 +20,9 @@ public class SessionService : ISessionService
         return await _sessionClient.checkIfSessionIsValid(checkUser.id);
     }
 
-    public async Task removeASession(int userId)
+    public async Task removeASession(string username)
     {
-        await _sessionClient.deleteASession(userId);
+        UserDB user = await _userClient.getUserData(username);
+        await _sessionClient.deleteASession(user.id);
     }
 }
