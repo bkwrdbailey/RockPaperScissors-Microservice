@@ -23,7 +23,10 @@ public class UserService : IUserService
         string hashedPassword = convertToHash(password + checkUser.salt);
 
         // Checking to see if entered data matches user data in the database
-        if (checkUser.username.ToLower() == username.ToLower() && checkUser.password == hashedPassword)
+        if (checkUser.id == 0) {
+            return false;
+        }
+        else if (checkUser.username.ToLower() == username.ToLower() && checkUser.password == hashedPassword)
         {
             await _sessionClient.addNewSession(checkUser.id);
             return true;

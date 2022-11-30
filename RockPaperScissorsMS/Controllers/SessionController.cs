@@ -23,5 +23,6 @@ public class SessionController : ControllerBase
     public async Task removeASession(string username)
     {
         await _service.removeASession(username);
+        Console.WriteLine("Exiting Session Client......");
     }
 }

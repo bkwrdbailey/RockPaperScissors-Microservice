@@ -18,7 +18,6 @@ public class UserClient
 
     public async Task<UserDB> getUserData(string username)
     {
-        Console.WriteLine("Entered Client");
         HttpResponseMessage response = await _client.GetAsync(_urlConfig.UserUrl + $"/Verify/{username}");
         var json = await response.Content.ReadAsStringAsync();
         return JsonSerializer.Deserialize<UserDB>(json) ?? new UserDB();

@@ -23,6 +23,8 @@ public class SessionService : ISessionService
     public async Task removeASession(string username)
     {
         UserDB user = await _userClient.getUserData(username);
+        Console.WriteLine("Exited UserClient");
         await _sessionClient.deleteASession(user.id);
+        Console.WriteLine("Exited SessionClient");
     }
 }
